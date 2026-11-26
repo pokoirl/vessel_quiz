@@ -99,6 +99,9 @@ const MX = (() => {
     one:"1", two:"2", three:"3", four:"4", first:"1", "1st":"1", second:"2", "2nd":"2", third:"3", "3rd":"3", fourth:"4", "4th":"4",
     i:"1", ii:"2", iii:"3", iv:"4", v5:"5", vi:"6", vii:"7", viii:"8", ix:"9", x:"10",
     early:"precocious", precocious:"precocious",
+    fibular:"peroneal", peroneal:"peroneal", coeliac:"celiac", oesophageal:"esophageal", esophageal:"esophageal", haemorrhoidal:"rectal", hemorrhoidal:"rectal",
+    gastroomental:"gastroepiploic", gastroepiploic:"gastroepiploic", node:"nodal", nodal:"nodal", perforator:"perforating", perforators:"perforating", perforating:"perforating",
+    innominate:"brachiocephalic", mammary:"thoracic",
     accessory:"accessory", acc:"accessory", replaced:"replaced", repl:"replaced",
     aberrant:"aberrant", lusoria:"aberrant", duplicated:"duplicated", duplicate:"duplicated", double:"duplicated",
     gastric:"gastric", hepatic:"hepatic", splenic:"splenic", mesenteric:"mesenteric", renal:"renal",
@@ -109,40 +112,104 @@ const MX = (() => {
     ica:["int carotid a"], eca:["ext carotid a"], cca:["common carotid a"], bct:["brachiocephalic trunk"],
     va:["vertebral a"], ba:["basilar a"], pca:["post cerebral a"], aca:["ant cerebral a"], mca:["mid cerebral a","mid colic a"],
     sca:["sup cerebellar a","subclavian a"], pica:["post inf cerebellar a"], aica:["ant inf cerebellar a"],
-    sma:["sup mesenteric a"], smv:["sup mesenteric v"], ima:["inf mesenteric a","int maxillary a"], imv:["inf mesenteric v"],
+    sma:["sup mesenteric a"], smv:["sup mesenteric v"], ima:["inf mesenteric a","int maxillary a","int mammary a"], imv:["inf mesenteric v"],
     gda:["gastroduodenal a"], cha:["common hepatic a"], pha:["proper hepatic a"], rha:["r hepatic a"], lha:["l hepatic a"], mha:["mid hepatic a"],
     lga:["l gastric a"], rga:["r gastric a"], sa:["splenic a","subclavian a"], ct:["celiac trunk"],
     ija:["int jugular v"], ijv:["int jugular v"], ejv:["ext jugular v"], ivc:["inf v cava"], svc:["sup v cava"],
     gsv:["great saphenous v"], ssv:["small saphenous v"], cfv:["common femoral v"], cfa:["common femoral a"], sfa:["superficial femoral a"],
-    pfa:["profunda femoris a"], ata:["ant tibial a"], pta:["post tibial a"], tpt:["tibioperoneal trunk"], dpa:["dorsalis pedis a"],
+    pfa:["profunda femoris a"], ata:["ant tibial a"], pta:["post tibial a"], tpt:["tibioperoneal trunk"], dpa:["dorsalis pedis a","dorsal pancreatic a"],
     cia:["common iliac a"], iia:["int iliac a"], eia:["ext iliac a"], sga:["sup gluteal a"], iga:["inf gluteal a"], ipa:["int pudendal a"],
-    mma:["mid meningeal a"], sta:["superficial temporal a"], apa:["ascending pharyngeal a"], icbt:["intercostobronchial trunk"],
-    lad:["l ant descending a"], lcx:["l circumflex a"], rca:["r coronary a"], pda:["pancreaticoduodenal a","posteriordescending a"], om:["obtuse marginal br"],
+    mma:["mid meningeal a"], sta:["superficial temporal a","sup thyroid a"], apa:["ascending pharyngeal a"], icbt:["intercostobronchial trunk"],
+    lad:["l ant descending a"], lcx:["l circumflex a"], rca:["r coronary a"], pda:["postdescending a","pancreaticoduodenal a"], om:["obtuse marginal br"],
     sss:["sup sagittal sinus"], iss:["inf sagittal sinus"], ssn:["sigmoid sinus"], cs:["cavernous sinus","coronary sinus"],
     sps:["sup petrosal sinus"], ips:["inf petrosal sinus"], icv:["int cerebral v"], aasv:["ant accessory saphenous v"],
     lsa:["l subclavian a"], rsa:["r subclavian a"], lcca:["l common carotid a"], rcca:["r common carotid a"], arsa:["aberrant r subclavian a"],
+    lmca:["l main"], lm:["l main"], cx:["l circumflex a"], ri:["ramus intermedius"], om1:["obtuse marginal br"], d1:["diagonal br"], d2:["diagonal br"],
+    mpa:["pulmonary trunk"], rpa:["r pulmonary a"], lpa:["l pulmonary a"], rspv:["r sup pulmonary v"], ripv:["r inf pulmonary v"], lspv:["l sup pulmonary v"], lipv:["l inf pulmonary v"],
+    bcv:["brachiocephalic v"], rbcv:["r brachiocephalic v"], lbcv:["l brachiocephalic v"], ita:["int thoracic a"], lima:["l int mammary a"], rima:["r int mammary a"],
+    tct:["thyrocervical trunk"], cct:["costocervical trunk"], hst:["hepatosplenic trunk"], gct:["gastrosplenic trunk"],
+    asa:["ant spinal a"], psa:["post spinal a"], acha:["ant choroidal a"], achoa:["ant choroidal a"], oa:["ophthalmic a","occipital a"], fa:["facial a","femoral a"], la:["lingual a"],
+    pma:["pterygoid plexus"], ts:["transverse sinus"], ss:["straight sinus","sigmoid sinus","sup sagittal sinus"], bvr:["basal v rosenthal"], vog:["great v galen"],
+    scv:["subclavian v"], eiv:["ext iliac v"], iiv:["int iliac v"], civ:["common iliac v"], fv:["femoral v"], pv:["popliteal v","portal v","pulmonary v"], pa:["popliteal a","pulmonary a"],
+    pop:["popliteal a"], popa:["popliteal a"], dfa:["profunda femoris a"], dfv:["profunda femoral v"], pfv:["profunda femoral v"], lsv:["great saphenous v"],
+    pera:["peroneal a"], atv:["ant tibial v"], ptv:["post tibial v"], iea:["inf epigastric a"], dcia:["deep circumflex iliac a"], scia:["superficial circumflex iliac a"],
+    rgea:["r gastroepiploic a"], lgea:["l gastroepiploic a"], rgepa:["r gastroepiploic a"], lgepa:["l gastroepiploic a"], ipda:["inf pancreaticoduodenal a"], spda:["sup pancreaticoduodenal a"],
+    rhv:["r hepatic v"], mhv:["mid hepatic v"], lhv:["l hepatic v"], rrv:["r renal v"], lrv:["l renal v"], rra:["r renal a"], lra:["l renal a"], splv:["splenic v"],
+    aka:["adamkiewicz"], gpa:["great pancreatic a"], mcfa:["med circumflex femoral a"], lcfa:["lat circumflex femoral a"], acha2:["ant choroidal a"],
     lva:["l vertebral a"], rva:["r vertebral a"], dpa2:["dorsal pancreatic a"], tpa:["transverse pancreatic a"], cmt:["celiacomesenteric trunk"],
   };
-  const FILLER = new Set(["a","v","the","of","from","to","into","and","with","its","at","on","in","by","via","straight","directly","arising","s","it"]);
-  const OPP = [["r","l"],["sup","inf"],["ant","post"],["replaced","accessory"],["int","ext"],["high","low"],["med","lat"],["ascending","descending"],["superficial","deep"],["great","small"],["upper","lower"]];
+  // other wordings of the same vessel: [form used in the answers, other ways to say it]
+  const ALT = [
+    ["basilar a", ["basilar trunk"]],
+    ["brachiocephalic trunk", ["brachiocephalic a"]],
+    ["celiac trunk", ["celiac axis","celiac a"]],
+    ["costocervical trunk", ["costocervical a"]], ["thyrocervical trunk", ["thyrocervical a"]],
+    ["tibioperoneal trunk", ["tibioperoneal a"]],
+    ["pulmonary trunk", ["main pulmonary a","main pulmonary trunk","common pulmonary a"]],
+    ["l main", ["l main coronary a","l main coronary","l main stem","l main a","l coronary main stem"]],
+    ["l ant descending a", ["ant interventricular a","ant interventricular br","l ant interventricular a"]],
+    ["postdescending a", ["post descending a","post interventricular a","post interventricular br","post interventricular"]],
+    ["pcomm", ["post comm a","post comm"]], ["acomm", ["ant comm a","ant comm"]],
+    ["sinoatrial nodal a", ["sa nodal a","sa nodal br","sinus nodal a","sinoatrial a"]],
+    ["av nodal a", ["atrioventricular nodal a","av a"]],
+    ["maxillary a", ["int maxillary a"]],
+    ["int thoracic a", ["int thoracic a"]],
+    ["profunda femoris a", ["deep femoral a","profunda femoral a","profunda a"]],
+    ["profunda femoral v", ["deep femoral v","profunda femoris v"]],
+    ["profunda brachii a", ["deep brachial a","profunda brachial a"]],
+    ["great saphenous v", ["long saphenous v","greater saphenous v","long saphenous","greater saphenous"]],
+    ["small saphenous v", ["short saphenous v","lesser saphenous v","short saphenous","lesser saphenous"]],
+    ["great v of galen", ["v of galen","great cerebral v","galenic v","galen v"]],
+    ["torcular", ["torcular herophili","confluence of sinuses","confluence of the sinuses","sinus confluence","confluence"]],
+    ["basal v", ["basal v of rosenthal","v of rosenthal","rosenthal v"]],
+    ["v of trolard", ["sup anastomotic v","trolard v"]], ["v of labbe", ["inf anastomotic v","labbe v"]],
+    ["adamkiewicz", ["adamkiewicz hairpin","a of adamkiewicz","arteria radicularis magna","great radicular a","great radiculomedullary a","great ant radiculomedullary a","great ant radicular a"]],
+    ["great pancreatic a", ["pancreatica magna","a pancreatica magna","pancreatica magna a"]],
+    ["arc of riolan", ["meandering mesenteric a","riolan arc","riolan arcade","arcade of riolan"]],
+    ["marginal a", ["marginal a of drummond","drummond a","marginal a drummond"]],
+    ["dorsalis pedis a", ["dorsal a of foot","dorsal a of the foot","dorsal pedal a","pedal a"]],
+    ["cavernous segment", ["carotid siphon","siphon","c4","cavernous int carotid a","cavernous segment int carotid a","int carotid a cavernous segment"]],
+    ["petrous segment", ["c2","petrous int carotid a","petrous segment int carotid a","int carotid a petrous segment"]],
+    ["common facial trunk", ["common facial v"]],
+    ["anastomotic br", ["communicating br","communicating v","anastomotic v"]],
+    ["pterygoid plexus", ["pterygoid venous plexus"]],
+    ["superficial femoral a", ["sfa"]],
+    ["tibioperoneal trunk", ["tibiofibular trunk","tibioperoneal trunk"]],
+  ];
+  // the side may be left out for paired (mirror) vessels — kept when the side is part of the name or the variant
+  const SIDE_KEEP = ["br","arcade","gastric","gastroepiploic","hepatic","colic","coronary","main","circumflex","descending","interventricular","from","arising","aberrant","replaced","accessory","origin"];
+  const FILLER = new Set(["br","segment","a","v","the","of","from","to","into","and","with","its","at","on","in","by","via","straight","directly","arising","s","it"]);
+  const OPP = [["r","l"],["interlobar","interlobular"],["sup","inf"],["ant","post"],["replaced","accessory"],["int","ext"],["high","low"],["med","lat"],["ascending","descending"],["superficial","deep"],["great","small"],["upper","lower"]];
   const CRIT = new Set(["r","l","sup","inf","ant","post","replaced","accessory","int","ext","high","low","med","lat","aberrant","duplicated",
     "1","2","3","4","5","6","7","8","9","10","sma","separate","only","origin","normal","usual","both","alone","shared","complete","no","high","long","polar","hilar","celiac","aorta","gastric","hepatic","splenic","renal","ovarian","subclavian","bct","mesenteric"]);
 
   function clean(s){
     return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
-      .replace(/['’]/g,"").replace(/\(([^)]*)\)/g," $1 ").replace(/[^a-z0-9]+/g," ").trim();
+      .replace(/['’]/g,"").replace(/([a-z])-([a-z])/g,"$1$2").replace(/\(([^)]*)\)/g," $1 ").replace(/[^a-z0-9]+/g," ").trim();
   }
   function tokens(s){ // canonical tokens, abbreviations expanded (first expansion; alternatives handled separately)
     return clean(s).split(" ").filter(Boolean).map(w => SYN[w] || w);
   }
+  const ALTT = []; // tokenised, longest first
+  for(const [canon, alts] of ALT) for(const a of alts){ const at = clean(a).split(" ").map(w => SYN[w] || w), ct = clean(canon).split(" ").map(w => SYN[w] || w);
+    if(at.join(" ") !== ct.join(" ")) ALTT.push([at, ct]) }
+  ALTT.sort((x,y) => y[0].length - x[0].length);
+  function rewrite(ws){
+    const out = [];
+    for(let i=0; i<ws.length; ){
+      const m = ALTT.find(([at]) => at.every((t,k) => ws[i+k] === t));
+      if(m){ out.push(...m[1]); i += m[0].length } else { out.push(ws[i]); i++ }
+    }
+    return out;
+  }
   function variants(s){ // all expansions of ambiguous abbreviations
     let outs = [[]];
-    for(const w of clean(s).split(" ").filter(Boolean)){
+    for(const w of rewrite(clean(s).split(" ").filter(Boolean).map(w => ABBR[w] ? w : (SYN[w] || w)))){
       const ex = ABBR[w];
       if(ex){ const n = []; for(const o of outs) for(const e of ex) n.push(o.concat(e.split(" "))); outs = n.slice(0, 16) }
       else outs.forEach(o => o.push(w));
     }
-    return outs.map(ws => ws.map(w => SYN[w] || w));
+    return outs.map(ws => rewrite(ws.map(w => SYN[w] || w)));
   }
   function lev(a, b){
     if(a===b) return 0; const m=a.length, n=b.length; if(!m||!n) return m||n;
@@ -160,16 +227,21 @@ const MX = (() => {
   function targets(target){
     const out = [];
     const noPar = target.replace(/\([^)]*\)/g, " ").replace(/\s+/g, " ").trim();
+    target = target.replace(/\(\s*not\b[^)]*\)/gi, " ");
     const pars = [...target.matchAll(/\(([^)]*)\)/g)].map(m => m[1]);
     let req = noPar.replace(/^usual:\s*/i, ""), opt = pars.join(" ");
     const parts = req.split(/[,;]\s+|\s+—\s+/);
     // a trailing clause is optional only if it adds nothing decisive (no side, number, origin...)
     if(parts.length > 1 && core(tokens(parts[0])).length >= 2 && !core(tokens(parts.slice(1).join(" "))).some(t => CRIT.has(t))){ req = parts[0]; opt += " " + parts.slice(1).join(" ") }
     out.push({req, opt: opt + " " + target});
+    // "X → where it goes": naming X is enough; a pathway number on the figure ("1 Left gastric v.") needn't be typed
+    const head = req.split("→")[0].replace(/^\s*\d+\s+(?=[A-Za-z])/, "").trim();
+    const hc = core(tokens(head)).filter(t => t!=="r" && t!=="l");
+    if(head !== req.trim() && (hc.length >= 2 || (hc.length === 1 && tokens(head).some(t => t==="a" || t==="v" || t==="br")))) out.push({req: head, opt: opt + " " + target});
     // eponyms: "vein of Galen", "Galen", "Labbé"… are enough on their own
     for(const m of target.matchAll(/\bof ([A-Z][a-zéèë]+)/g)) out.push({req: m[1], opt: target});
     for(const p of pars){
-      const q = p.match(/['‘’"]([^'‘’"]+)['‘’"]/); if(q) out.push({req: q[1], opt: target});
+      const q = p.match(/['‘’"]([^'‘’"]+)['‘’"]/); if(q && !/^\s*not\b/i.test(p)) out.push({req: q[1], opt: target});
       if(/michels|type/i.test(p)) out.push({req: p, opt: target});
     }
     return out;
@@ -182,7 +254,10 @@ const MX = (() => {
         const U = core(U0);
         if(!U.length) continue;
         for(const T0 of variants(tg.req)){
-          const Tc = core(T0); if(!Tc.length) continue;
+          let Tc = core(T0); if(!Tc.length) continue;
+          const sideFree = !strict && !U0.some(u => u==="r" || u==="l") && !SIDE_KEEP.some(k => T0.includes(k) || tokens(target).includes(k));
+          if(sideFree) Tc = Tc.filter(t => t!=="r" && t!=="l");
+          if(!Tc.length) continue;
           const Tall = T0.concat(optAll);
           // contradictions (incl. artery vs vein): user says the opposite of what the answer says
           const opp = OPP.concat([["a","v"],["normal","replaced"],["normal","accessory"],["normal","aberrant"]]);
