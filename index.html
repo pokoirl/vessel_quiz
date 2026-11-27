@@ -622,7 +622,21 @@ function end(){
   document.getElementById("h").onclick = home;
 }
 home();
-if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("sw.js").catch(()=>{});
+// offline copy: ask the phone not to delete it, and show whether it is ready
+let OFFLINE = null;
+function offlinePill(){ const hd=document.querySelector("header .stats"); if(!hd) return; let p=document.getElementById("offp");
+  if(!p){ p=document.createElement("span"); p.id="offp"; p.className="pill"; hd.prepend(p); }
+  const t = OFFLINE===true ? "✈️ Offline OK" : OFFLINE===false ? "⚠️ Not offline yet" : "…"; if(p.textContent!==t) p.textContent=t; }
+new MutationObserver(offlinePill).observe(document.body,{childList:true,subtree:true});
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){
+  if(navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(()=>{});
+  navigator.serviceWorker.register("sw.js").catch(()=>{});
+  const check = async () => { try { const ks = await caches.keys(); let ok=false;
+      for(const k of ks){ const c=await caches.open(k); if(await c.match("./index.html")) ok=true; }
+      OFFLINE = ok && !!navigator.serviceWorker.controller; } catch(e){ OFFLINE=false } offlinePill(); };
+  navigator.serviceWorker.ready.then(()=>setTimeout(check,1500)); navigator.serviceWorker.addEventListener("controllerchange",()=>setTimeout(check,1500));
+  setTimeout(check,4000);
+} else { OFFLINE=false; offlinePill(); }
 </script>
 </body>
 </html>
